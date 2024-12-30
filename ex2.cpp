@@ -1,17 +1,48 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int main() {
-    int min, n;
-    cout << "Entrez 10 entiers: ";
-    cin >> min;
+void afficherP(int& x, int seuil = 0) {
+    if (x >= 0)
+        cout << x << "\t";
+}
 
-    for (int i = 1; i < 10; i++) {
-        cin >> n;
-        if (n < min) min = n;
+void afficherN(int& x, int seuil = 0) {
+    if (x < 0)
+        cout << x << "\t";
+}
+
+void greaterThan(int& x, int seuil) {
+    if (x >= seuil)
+        cout << x << "\t";
+}
+
+void appliquerFiltre(vector<int>& vec, void(*filtre)(int&, int)) {
+    int seuil = 0;
+    if (filtre == greaterThan) {
+        cout << "Donner seuil: ";
+        cin >> seuil;
     }
+    for (int& e : vec) {
+        filtre(e, seuil);
+    }
+}
 
-    cout << "Le plus petit entier est: " << min << endl;
-
+int main() {
+    vector<int> tab{ -2, 3, -33, 7, 99, 6, 2, -39 };
+    cout << "************************\n";
+    cout << "* 1. Afficher positif *\n";
+    cout << "* 2. Afficher Negatif *\n";
+    cout << "* 3. Superieur A      *\n";
+    cout << "************************\n";
+    cout << "Entrez votre choix? ";
+    int choix;
+    cin >> choix;
+    switch (choix) {
+        case 1: appliquerFiltre(tab, afficherP); break;
+        case 2: appliquerFiltre(tab, afficherN); break;
+        case 3: appliquerFiltre(tab, greaterThan); break;
+        default: break;
+    }
     return 0;
 }
