@@ -1,36 +1,41 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-void swapValue(int a, int b) {
-    int temp = a;
-    a = b;
-    b = temp;
-    cout << "a = " << a << ", b = " << b << endl;
+void dessinerCone(int hauteur) {
+    for (int i = 1; i <= hauteur; i++) {
+        for (int j = 1; j <= hauteur - i; j++) cout << " ";
+        for (int j = 1; j <= 2 * i - 1; j++) cout << "*";
+        cout << endl;
+    }
 }
 
-void swapReference(int& a, int& b) {
-    int temp = a;
-    a = b;
-    b = temp;
+void dessinerTronc(int hauteur, int largeur) {
+    for (int i = 0; i < hauteur; i++) {
+        for (int j = 0; j < (largeur - 1) / 2; j++) cout << " ";
+        for (int j = 0; j < largeur; j++) cout << "#";
+        cout << endl;
+    }
 }
 
-void swapPointer(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+void dessinerBoules(int hauteur) {
+    srand(time(0));
+    for (int i = 1; i <= hauteur; i++) {
+        for (int j = 1; j <= 2 * i - 1; j++) {
+            if (rand() % 2 == 0 && j != 1 && j != 2 * i - 1) cout << "O";
+            else cout << "*";
+        }
+        cout << endl;
+    }
 }
 
 int main() {
-    int a = 5, b = 10;
+    int hauteurCone = 6, hauteurTronc = 2, largeurTronc = 3;
 
-    swapValue(a, b);
-    cout << "Après swap par valeur: a = " << a << ", b = " << b << endl;
-
-    swapReference(a, b);
-    cout << "Après swap par référence: a = " << a << ", b = " << b << endl;
-
-    swapPointer(&a, &b);
-    cout << "Après swap par pointeur: a = " << a << ", b = " << b << endl;
+    dessinerCone(hauteurCone);
+    dessinerTronc(hauteurTronc, largeurTronc);
+    dessinerBoules(hauteurCone);
 
     return 0;
 }

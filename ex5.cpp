@@ -1,29 +1,27 @@
 #include <iostream>
-#include <cmath>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-double f(double x, bool &OK) {
-    if (x <= 1 || x >= 2) {
-        OK = false;
-        return 0;
-    } else {
-        OK = true;
-        return sqrt((x - 1) * (2 - x));
-    }
+double generateRandomDouble(double min, double max) {
+    return min + (rand() / (RAND_MAX / (max - min)));
+}
+
+int generateRandomInt(int min, int max) {
+    return min + rand() % (max - min + 1);
 }
 
 int main() {
-    double x;
-    bool OK;
-    cout << "Entrez x: ";
-    cin >> x;
-
-    double result = f(x, OK);
-    if (OK) {
-        cout << "La racine carrée est: " << result << endl;
-    } else {
-        cout << "La fonction n'est pas définie pour x = " << x << endl;
+    srand(time(0));
+    for (int i = 0; i < 5; i++) {
+        cout << generateRandomDouble(1.0, 10.0) << " ";
     }
+    cout << endl;
+
+    for (int i = 0; i < 5; i++) {
+        cout << generateRandomInt(1, 100) << " ";
+    }
+    cout << endl;
 
     return 0;
 }

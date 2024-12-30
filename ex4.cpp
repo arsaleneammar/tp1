@@ -1,29 +1,47 @@
 #include <iostream>
-#include <cmath>
+#include <cstdlib>
 using namespace std;
 
-double f(double x, bool &OK) {
-    if (x <= 1 || x >= 2) {
-        OK = false;
-        return 0;
-    } else {
-        OK = true;
-        return sqrt((x - 1) * (2 - x));
-    }
+void addition(int a, int b, int& resultat) {
+    resultat = a + b;
+}
+
+void soustraction(int a, int b, int& resultat) {
+    resultat = a - b;
+}
+
+void multiplication(int a, int b, int& resultat) {
+    resultat = a * b;
+}
+
+void division(int a, int b, double& resultat) {
+    if (b != 0) resultat = (double)a / b;
+    else cout << "Division par zéro impossible." << endl;
 }
 
 int main() {
-    double x;
-    bool OK;
-    cout << "Entrez x: ";
-    cin >> x;
+    int a, b, resultat;
+    double resultatDiv;
+    int choix;
+    do {
+        system("cls");
+        cout << "1. Addition\n2. Soustraction\n3. Multiplication\n4. Division\n5. Quitter\n";
+        cout << "Choisissez une opération: ";
+        cin >> choix;
 
-    double result = f(x, OK);
-    if (OK) {
-        cout << "La racine carrée est: " << result << endl;
-    } else {
-        cout << "La fonction n'est pas définie pour x = " << x << endl;
-    }
+        if (choix == 5) break;
+
+        cout << "Entrez a et b: ";
+        cin >> a >> b;
+
+        switch (choix) {
+            case 1: addition(a, b, resultat); cout << "Résultat: " << resultat << endl; break;
+            case 2: soustraction(a, b, resultat); cout << "Résultat: " << resultat << endl; break;
+            case 3: multiplication(a, b, resultat); cout << "Résultat: " << resultat << endl; break;
+            case 4: division(a, b, resultatDiv); cout << "Résultat: " << resultatDiv << endl; break;
+            default: cout << "Choix invalide." << endl;
+        }
+    } while (true);
 
     return 0;
 }
