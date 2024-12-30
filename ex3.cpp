@@ -1,20 +1,33 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
+void incrementer(int& a) {
+    a++;
+}
+
+void permuter(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void permuterRef(int& a, int& b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
 int main() {
-    int N;
-    cout << "Combien de mots voulez-vous saisir? ";
-    cin >> N;
+    int x = 5, y = 10;
 
-    string mot, mot_long;
-    cout << "Entrez les mots: ";
-    for (int i = 0; i < N; i++) {
-        cin >> mot;
-        if (mot.length() > mot_long.length()) mot_long = mot;
-    }
+    incrementer(x);
+    cout << "Après incrémentation : x = " << x << endl;
 
-    cout << "Le mot le plus long est: " << mot_long << endl;
+    permuter(&x, &y);
+    cout << "Après permutation par pointeur : x = " << x << ", y = " << y << endl;
+
+    permuterRef(x, y);
+    cout << "Après permutation par référence : x = " << x << ", y = " << y << endl;
 
     return 0;
 }

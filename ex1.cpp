@@ -2,22 +2,19 @@
 using namespace std;
 
 int main() {
-    double distance;
-    int choix;
-    cout << "1. Kilomètres vers Miles\n2. Miles vers Kilomètres\nChoisissez une option: ";
-    cin >> choix;
+    int entier = 5;
+    cout << entier << " à l'adresse: " << &entier << endl;
 
-    if (choix == 1) {
-        cout << "Entrez la distance en kilomètres: ";
-        cin >> distance;
-        cout << distance << " km = " << distance / 1.609 << " miles" << endl;
-    } else if (choix == 2) {
-        cout << "Entrez la distance en miles: ";
-        cin >> distance;
-        cout << distance << " miles = " << distance * 1.609 << " km" << endl;
-    } else {
-        cout << "Option invalide." << endl;
-    }
+    int* pEntier = new int(10);
+    cout << *pEntier << " à l'adresse: " << pEntier << endl;
+    delete pEntier;
+
+    double reel = 3.14;
+    cout << reel << " à l'adresse: " << &reel << endl;
+
+    double* pReel = new double(6.28);
+    cout << *pReel << " à l'adresse: " << pReel << endl;
+    delete pReel;
 
     return 0;
 }
