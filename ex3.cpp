@@ -1,20 +1,35 @@
 #include <iostream>
-#include <string>
+#include <vector>
 using namespace std;
 
-int main() {
-    int N;
-    cout << "Combien de mots voulez-vous saisir? ";
-    cin >> N;
+int produitScalaire(const vector<int>& U, const vector<int>& V) {
+    int resultat = 0;
+    for (size_t i = 0; i < U.size(); ++i) {
+        resultat += U[i] * V[i];
+    }
+    return resultat;
+}
 
-    string mot, mot_long;
-    cout << "Entrez les mots: ";
-    for (int i = 0; i < N; i++) {
-        cin >> mot;
-        if (mot.length() > mot_long.length()) mot_long = mot;
+int main() {
+    int taille;
+    cout << "Entrez la dimension des vecteurs : ";
+    cin >> taille;
+
+    vector<int> U(taille), V(taille);
+
+    cout << "Entrez les elements du vecteur U :\n";
+    for (int i = 0; i < taille; ++i) {
+        cin >> U[i];
     }
 
-    cout << "Le mot le plus long est: " << mot_long << endl;
+    cout << "Entrez les elements du vecteur V :\n";
+    for (int i = 0; i < taille; ++i) {
+        cin >> V[i];
+    }
+
+    int resultat = produitScalaire(U, V);
+
+    cout << "Le produit scalaire de U et V est : " << resultat << endl;
 
     return 0;
 }

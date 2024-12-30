@@ -1,29 +1,39 @@
 #include <iostream>
-#include <cmath>
+#include <vector>
+#include <string>
 using namespace std;
 
-double f(double x, bool &OK) {
-    if (x <= 1 || x >= 2) {
-        OK = false;
-        return 0;
-    } else {
-        OK = true;
-        return sqrt((x - 1) * (2 - x));
+struct Ville {
+    string nom;
+    double latitude;
+    double longitude;
+};
+
+void rechercherVilleParNom(const vector<Ville>& villes, const string& nom) {
+    for (const auto& ville : villes) {
+        if (ville.nom == nom) {
+            cout << "La ville " << nom << " se situe à : "
+                 << "Latitude: " << ville.latitude << ", "
+                 << "Longitude: " << ville.longitude << endl;
+            return;
+        }
     }
+    cout << "Ville non trouvée !" << endl;
 }
 
 int main() {
-    double x;
-    bool OK;
-    cout << "Entrez x: ";
-    cin >> x;
+    vector<Ville> villes = {
+        {"Tunis", 36.8065, 10.1815},
+        {"Sfax", 34.7406, 10.7602},
+        {"Sousse", 35.8256, 10.6369},
+        {"Kairouan", 35.6786, 9.8761},
+    };
 
-    double result = f(x, OK);
-    if (OK) {
-        cout << "La racine carrée est: " << result << endl;
-    } else {
-        cout << "La fonction n'est pas définie pour x = " << x << endl;
-    }
+    string villeRecherchee;
+    cout << "Entrez le nom de la ville à rechercher : ";
+    cin >> villeRecherchee;
+
+    rechercherVilleParNom(villes, villeRecherchee);
 
     return 0;
 }
